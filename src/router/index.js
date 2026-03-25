@@ -8,32 +8,36 @@ const routes = [
   {
     path: '/chat',
     name: 'chat',
-    component: () => import('../views/Chat.vue')
+    component: () => import('../views/Chat.vue').then(m => m.default || m)
   },
   {
     path: '/config',
     name: 'config',
-    component: () => import('../views/Config.vue')
+    component: () => import('../views/Config.vue').then(m => m.default || m)
   },
   {
     path: '/tasks',
     name: 'tasks',
-    component: { template: '<div>OpenTask (Not Implemented)</div>' }
+    component: () => import('../views/Placeholder.vue').then(m => m.default || m),
+    props: { text: 'OpenTask (Not Implemented)' }
   },
   {
     path: '/extensions',
     name: 'extensions',
-    component: { template: '<div>Extensions (Not Implemented)</div>' }
+    component: () => import('../views/Placeholder.vue').then(m => m.default || m),
+    props: { text: 'Extensions (Not Implemented)' }
   },
   {
     path: '/data',
     name: 'data',
-    component: { template: '<div>Data (Not Implemented)</div>' }
+    component: () => import('../views/Placeholder.vue').then(m => m.default || m),
+    props: { text: 'Data (Not Implemented)' }
   },
   {
     path: '/console',
     name: 'console',
-    component: { template: '<div>Console (Not Implemented)</div>' }
+    component: () => import('../views/Placeholder.vue').then(m => m.default || m),
+    props: { text: 'Console (Not Implemented)' }
   }
 ]
 

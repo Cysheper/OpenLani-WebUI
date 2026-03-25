@@ -1,20 +1,40 @@
 <template>
-  <div class="header-container">
+  <div
+    class="header-container"
+    :style="{
+      backgroundColor: isDark ? '#0f0f0f' : '#ffffff',
+      borderBottomColor: isDark ? '#464648' : 'var(--el-border-color)'
+    }"
+  >
     <div class="left-section">
-      <el-button link @click="toggleNav" class="hamburger-btn">
+      <el-button
+        link
+        @click="toggleNav"
+        class="hamburger-btn"
+        :style="{ color: isDark ? '#ffffff' : '#1f1f1f' }"
+      >
         <el-icon :size="20"><Menu /></el-icon>
       </el-button>
-      <span class="brand-name">OpenLani</span>
+      <span
+        class="brand-name"
+        :style="{ color: isDark ? '#ffffff' : '#1f1f1f' }"
+      >
+        OpenLani
+      </span>
     </div>
     <div class="right-section">
       <el-dropdown trigger="click" @command="handleCommand">
-        <el-button link class="more-btn">
+        <el-button
+          link
+          class="more-btn"
+          :style="{ color: isDark ? '#ffffff' : '#1f1f1f' }"
+        >
           <el-icon :size="20"><MoreFilled /></el-icon>
         </el-button>
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item command="theme">
-              {{ t('darkModeToggle') }}
+              {{ themeToggleLabel }}
             </el-dropdown-item>
             <el-dropdown-item command="lang">
               {{ t('langToggle') }}
@@ -54,7 +74,7 @@
 </template>
 
 <script setup>
-import { ref, inject } from 'vue'
+import { ref, inject, computed } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Menu, MoreFilled } from '@element-plus/icons-vue'
 import { request } from '../api'
@@ -63,6 +83,9 @@ const toggleNav = inject('toggleNav')
 const t = inject('t')
 const toggleTheme = inject('toggleTheme')
 const toggleLanguage = inject('toggleLanguage')
+const isDark = inject('isDark')
+
+const themeToggleLabel = computed(() => (isDark?.value ? t('lightModeToggle') : t('darkModeToggle')))
 
 const accountDialogVisible = ref(false)
 const accountForm = ref({
@@ -103,7 +126,7 @@ const saveAccount = async () => {
   align-items: center;
   height: 60px;
   padding: 0 20px;
-  background-color: var(--el-bg-color);
+  background-color: #ffffff;
   border-bottom: 1px solid var(--el-border-color);
 }
 .left-section, .right-section {
@@ -115,10 +138,10 @@ const saveAccount = async () => {
   font-size: 20px;
   font-weight: 600;
   margin-left: 20px;
-  color: var(--el-text-color-primary);
+  color: #1f1f1f;
 }
 .hamburger-btn, .more-btn {
-  color: var(--el-text-color-primary);
+  color: #1f1f1f;
 }
 .dialog-header {
   text-align: center;

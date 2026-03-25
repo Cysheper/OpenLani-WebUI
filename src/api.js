@@ -1,6 +1,6 @@
 // 这里是 API 接口的基础 URL，如果后端地址有变动，请在这里修改
 export const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'
-    
+
 // 封装一个基础网络请求函数
 export const request = async (endpoint, options = {}) => {
   const url = `${API_BASE_URL}${endpoint}`
