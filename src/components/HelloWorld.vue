@@ -1,59 +1,112 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa" target="_blank" rel="noopener">pwa</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+
+  <div>
+      <h3>按钮</h3>
+      <el-button>默认按钮</el-button>
+      <el-button type="primary">主要按钮</el-button>
+      <el-button type="success">成功按钮</el-button>
+      <el-button type="info">信息按钮</el-button>
+      <el-button type="warning">警告按钮</el-button>
+      <el-button type="danger">危险按钮</el-button>
+      <hr>
+      <h3>按钮属性</h3>
+      <el-button plain>朴素按钮</el-button>
+      <el-button round>圆角按钮</el-button>
+      <el-button circle>圆</el-button>
+      <el-button disabled>禁用按钮</el-button>
+      <el-button loading>加载中</el-button>
+
+      <hr>
+      <h3>尺寸</h3>
+      <el-button size="large">大型按钮</el-button>
+      <el-button>默认按钮</el-button>
+      <el-button size="small">小型按钮</el-button>
+
+
+      <h3>图标</h3>
+      <el-icon><Plus /></el-icon>
+      <el-icon><Edit /></el-icon>
+      <el-icon><Delete /></el-icon>
+      <el-icon class="is-loading"><Loading /></el-icon>
+
+      <hr>
+      <h3>属性</h3>
+      <el-icon size="30" color="red"><Search /></el-icon>
+
+      <hr>
+      <h3>按钮</h3>
+      <el-button type="primary">
+          <el-icon><Search /></el-icon>
+          <span> 搜索 </span>
+      </el-button>
+
+      <el-button type="primary">
+          <el-icon><Search /></el-icon>
+      </el-button>
+
+      <el-button type="primary" circle>
+          <el-icon><Search /></el-icon>
+      </el-button>
+
+      <hr>
+      <h3>按钮组</h3>
+      <el-button-group>
+          <el-button type="primary">
+              <el-icon><Plus /></el-icon>
+          </el-button>
+
+          <el-button type="primary">
+              <el-icon><Edit /></el-icon>
+          </el-button>
+
+          <el-button type="primary">
+              <el-icon><Delete /></el-icon>
+          </el-button>
+      </el-button-group>
+
+      <hr>
+      <h3>消息提示</h3>
+      <el-button @click="openMsg">消息</el-button>
+      <el-button @click="openConfirm">确认框</el-button>
+      <el-button @click="openNotify">通知</el-button>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+<script setup>
+import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
+
+// 消息
+const openMsg = () => {
+    ElMessage({
+        type: 'success', // success | warning | info | error
+        message: 'success!',
+        showClose: true
+    })
+}
+// 确认框
+const openConfirm = () => {
+  ElMessageBox.confirm('确认删除?', '标题', {
+      type: 'warning',
+      confirmButtonText: '确认',
+      cancelButtonText: '取消'
+  }).then(() => {
+      console.log('确认')
+  }).catch(() => {
+      console.log('取消')
+  })
+}
+// 通知
+const openNotify = () => {
+    ElNotification({
+      type: 'success',
+      title: '标题',
+      message: 'success',
+      duration: 3000, // 展示时间 [单位:毫秒]
+      position: 'bottom-right'
+    })
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
